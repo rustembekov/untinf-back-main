@@ -1,9 +1,9 @@
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .serializers import TestSerializer, QuestionSerializer
+from .serializers import TestSerializer, QuestionSerializer, OptionSerializer
 
-from .models import Data, Test, Question
+from .models import Data, Test, Question, Option
 
 
 def hello_world(request):
@@ -24,3 +24,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     filterset_fields = ['test']
+
+class OptionViewSet(viewsets.ModelViewSet):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer

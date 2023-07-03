@@ -6,7 +6,7 @@ class Data(models.Model):
 
 
 class Test(models.Model):
-    name = models.CharField(max_length=100)
+    topic = models.CharField(max_length=100)
     type_choices = (
         ('Python', 'Python'),
         ('Excel', 'Excel'),
@@ -24,6 +24,7 @@ class Test(models.Model):
 
 
 class Question(models.Model):
+    title = models.CharField(max_length=100)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     variant_type_choices = (
         ('1', '1'),
@@ -37,5 +38,14 @@ class Question(models.Model):
         ('ordinary', 'Ordinary'),
         ('multiple-response', 'Multiple-Response'),
     )
-    variant_choices = models.CharField(max_length=100, choices=variant_type_choices)
+    variant = models.CharField(max_length=100, choices=variant_type_choices)
     question_type = models.CharField(max_length=100, choices=question_type_choices)
+
+    def __str__(self):
+        return self.title
+class Option(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.text
