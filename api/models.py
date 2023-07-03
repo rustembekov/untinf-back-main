@@ -20,7 +20,7 @@ class Test(models.Model):
     form = models.CharField(max_length=100, choices=form_choices)
 
     def __str__(self):
-        return self.name
+        return self.topic
 
 
 class Question(models.Model):
@@ -43,6 +43,8 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+
+
 class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
